@@ -13,7 +13,7 @@ services:
       - db-data:/var/lib/postgresql/data
     env_file:
       - ./.db_env
-  what_to_code_backend:
+  backend:
     build: ./backend
     ports:
       - "8001:80"
@@ -22,7 +22,7 @@ services:
     depends_on:
       - redis
       - db
-  what_to_code_frontend:
+  frontend:
     build: ./frontend
     ports:
       - "3000:3000"
