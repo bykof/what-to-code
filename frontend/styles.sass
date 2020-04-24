@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap')
+
+// https://colorhunt.co/palette/179682
+$yellow: #f4e04d
+$very-light-yellow: #FDFBE9
+$light-yellow: #f2ed6f
+$light-green: #cee397
+$turquoise: #8db1ab
+$primary: $yellow
+$family-sans-serif: 'Lato', sans-serif
+$link: $turquoise
+
+@import "~bulma/bulma.sass"
+
+header
+  margin-bottom: $size-1
+
+.logo
+  justify-content: "center"
+
+  &.navbar-item:hover
+    background-color: inherit
+    color: $yellow
+
+  span
+    font-weight: 900
+    margin-top: 5px
+    margin-left: $size-1
