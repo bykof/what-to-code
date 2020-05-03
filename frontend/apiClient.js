@@ -26,6 +26,10 @@ export const getPopularTags = async () => {
   return Axios.get(`${API_URL}/tags/popular`);
 };
 
+export const getRandomIdea = async () => {
+  return Axios.get(`${API_URL}/ideas/random`);
+};
+
 export const likeIdea = async (id, token) => {
   return Axios.post(
     `${API_URL}/ideas/${id}/like`,

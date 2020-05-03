@@ -161,6 +161,13 @@ export default ({ children }) => {
               <div className="navbar-end">
                 <div className="navbar-item">
                   <div className="buttons">
+                    <a href="/random" className="button is-default">
+                      Random Idea
+                    </a>
+                  </div>
+                </div>
+                <div className="navbar-item">
+                  <div className="buttons">
                     <Link href="/submit">
                       <a className="button is-primary submit-button">
                         Submit What to Code

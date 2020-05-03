@@ -57,7 +57,7 @@ const Index = ({ order }) => {
 export async function getServerSideProps(context) {
   return {
     props: {
-      order: context.query.order,
+      order: context.query.order || null,
     },
   };
 }
