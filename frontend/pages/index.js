@@ -6,6 +6,8 @@ import IdeaOrder, { POPULAR } from "../components/IdeaOrder";
 import IdeasCardList from "../components/IdeasCardList";
 import PopularTagsAside from "../components/PopularTagsAside";
 import TagLink from "../components/TagLink";
+import Link from "next/link";
+import SideMenu from '../components/SideMenu';
 
 const Index = ({ router }) => {
   const [orderType, setOrderType] = useState(router.query.order || POPULAR);
@@ -23,20 +25,7 @@ const Index = ({ router }) => {
         <div className="column is-one-quarter">
           <PopularTagsAside />
           <hr />
-          <aside className="menu">
-            <p className="menu-label">Links</p>
-            <ul className="menu-list">
-              <li>
-                <a>About</a>
-              </li>
-              <li>
-                <a>Privacy Policy</a>
-              </li>
-              <li>
-                <a>Contact</a>
-              </li>
-            </ul>
-          </aside>
+          <SideMenu />
         </div>
         <div className="column is-two-quarter">
           <IdeaOrder currentOrder={orderType} onOrderClick={setOrder} />
