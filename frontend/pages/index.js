@@ -9,7 +9,6 @@ import TagLink from "../components/TagLink";
 
 const Index = ({ router }) => {
   const [orderType, setOrderType] = useState(router.query.order || POPULAR);
-  console.log(router.query.order);
   const setOrder = (orderType) => {
     Router.replace({
       pathname: "/",
