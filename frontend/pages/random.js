@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
 import Idea from "../components/Idea";
-import { getRandomIdea } from "../apiClient";
+import { getRandomIdea, getIdea } from "../apiClient";
 import SideMenu from '../components/SideMenu';
 
 export default () => {
