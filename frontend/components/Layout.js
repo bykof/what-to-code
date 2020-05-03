@@ -11,6 +11,14 @@ export default ({ children }) => {
     <React.Fragment>
       <Head>
         <title>What to Code</title>
+        <meta
+          name="description"
+          content="Search or Create Ideas for Your Next Coding Project. Without Ads and Registration"
+        />
+        <meta
+          name="keywords"
+          content="ideas,code,programming,what to code,coding project,no ads,no registration,project,programming project"
+        />
         <link
           key="apple-touch-57"
           rel="apple-touch-icon"
@@ -154,7 +162,9 @@ export default ({ children }) => {
                 <div className="navbar-item">
                   <div className="buttons">
                     <Link href="/submit">
-                      <a className="button is-primary submit-button">Submit What to Code</a>
+                      <a className="button is-primary submit-button">
+                        Submit What to Code
+                      </a>
                     </Link>
                   </div>
                 </div>
