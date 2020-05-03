@@ -154,7 +154,7 @@ export default ({ children }) => {
                 <div className="navbar-item">
                   <div className="buttons">
                     <Link href="/submit">
-                      <a className="button is-primary">Submit What to Code</a>
+                      <a className="button is-primary submit-button">Submit What to Code</a>
                     </Link>
                   </div>
                 </div>
