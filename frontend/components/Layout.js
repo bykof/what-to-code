@@ -2,13 +2,13 @@ import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import classNames from "classnames";
-import useTokenCookie from '../hooks/useTokenCookie';
+import useTokenCookie from "../hooks/useTokenCookie";
 
 export default ({ children }) => {
   const [isActive, setIsActive] = useState(false);
   useTokenCookie();
   return (
-    <div>
+    <React.Fragment>
       <Head>
         <title>What to Code</title>
         <link
@@ -108,7 +108,7 @@ export default ({ children }) => {
         <meta
           key="viewport"
           name="viewport"
-          content="initial-scale=1.0, width=device-width"
+          content="width=device-width, initial-scale=1"
         />
       </Head>
       <header>
@@ -163,7 +163,9 @@ export default ({ children }) => {
           </div>
         </nav>
       </header>
-      <div className="container">{children}</div>
-    </div>
+      <section className="section">
+        <div className="container">{children}</div>
+      </section>
+    </React.Fragment>
   );
 };
