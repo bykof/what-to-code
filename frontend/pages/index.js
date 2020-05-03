@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import Router, { withRouter } from "next/router";
+import React, { useState, useEffect } from "react";
+import Router, { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import IdeaOrder, { POPULAR } from "../components/IdeaOrder";
 
 import IdeasCardList from "../components/IdeasCardList";
 import PopularTagsAside from "../components/PopularTagsAside";
 import TagLink from "../components/TagLink";
-import Link from "next/link";
-import SideMenu from '../components/SideMenu';
+import SideMenu from "../components/SideMenu";
 
-const Index = ({ router }) => {
-  const [orderType, setOrderType] = useState(router.query.order || POPULAR);
+const Index = ({ order }) => {
+  const router = useRouter();
+  const [orderType, setOrderType] = useState(order || POPULAR);
   const setOrder = (orderType) => {
     Router.replace({
       pathname: "/",
@@ -54,4 +54,12 @@ const Index = ({ router }) => {
   );
 };
 
-export default withRouter(Index);
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      order: context.query.order,
+    },
+  };
+}
+
+export default Index;

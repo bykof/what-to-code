@@ -14,8 +14,8 @@ export default ({ id, title, description, tags, likes, clickedLike }) => {
   return (
     <div className={classNames("card", styles.idea)}>
       <div className="card-content">
-        <p className="has-text-weight-bold is-size-4">{title}</p>
-        <p className="subtitle is-size-5">{description}</p>
+        <p className="has-text-weight-bold is-size-5">{title}</p>
+        <p className="subtitle">{description}</p>
         <p className="has-text-right is-size-6">
           {tags.map((tag) => (
             <TagLink tag={tag.value} key={tag.value}>
