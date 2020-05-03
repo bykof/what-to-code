@@ -1,10 +1,11 @@
-from typing import List
+from typing import List, Union
 
 from fastapi import APIRouter, Depends, HTTPException, Header
 from redis import StrictRedis
 from sqlalchemy import desc
 from sqlalchemy.orm import Session
 from sqlalchemy.sql.elements import or_
+from sqlalchemy.sql.functions import random
 
 from domain.models import Idea, Tag
 from domain.models.ideas_tags import IdeasTagsTable
@@ -43,6 +44,11 @@ async def get_ideas(
         query = query.filter(or_(Idea.title.contains(search), Idea.description.contains(search)))
 
     return query.offset(page * PAGE_SIZE).limit(PAGE_SIZE).all()
+
+
+@router.get('/random', response_model=Union[IdeaResponse, None])
+def random_idea(db: Session = Depends(get_db)):
+    return db.query(Idea).order_by(random()).limit(1).one_or_none()
 
 
 @router.get('/{id}', response_model=IdeaResponse)
