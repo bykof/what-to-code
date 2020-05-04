@@ -10,6 +10,8 @@ origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://server.bykovski.de:3000",
+    "http://what-to-code.com",
+    "http://www.what-to-code.com",
 ]
 app.add_middleware(
     CORSMiddleware,
