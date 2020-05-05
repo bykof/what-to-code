@@ -1,3 +1,4 @@
+import re
 from typing import List, Union
 
 from fastapi import APIRouter, Depends, HTTPException, Header
@@ -63,6 +64,9 @@ async def get_idea(id: int, db: Session = Depends(get_db)):
 async def create_idea(idea_request: CreateIdea, db: Session = Depends(get_db)):
     if len(idea_request.title) > 100:
         raise HTTPException(status_code=400, detail='Max 100 characters for title')
+
+    if not re.search(r'[\w]{3}', idea_request.title):
+        raise HTTPException(status_code=400, detail='Please provide at least 3 characters')
 
     if len(idea_request.description) > 1000:
         raise HTTPException(
