@@ -1,6 +1,6 @@
 import Router from "next/router";
 import Layout from "../components/Layout";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createIdea } from "../apiClient";
 import { RECENT } from "../components/IdeaOrder";
 
@@ -13,6 +13,7 @@ export default () => {
   const [descriptionInput, setDescriptionInput] = useState("");
   const [tagInput, setTagInput] = useState("");
   const [tags, setTags] = useState([]);
+  const tagInputElement = useRef(null);
 
   const removeTag = (key) => {
     const index = tags.findIndex((tag) => tag === key);
@@ -25,6 +26,12 @@ export default () => {
     setTags(copy);
     setTagsInputError(null);
   };
+
+  const addTag = (value) => {
+    setTags([...new Set([...tags, value])]);
+    setTagInput("");
+  };
+
   const onTagInput = (event) => {
     const value = event.target.value;
     const regex = /([\w]+)[\W]+/gm;
@@ -40,15 +47,29 @@ export default () => {
       return;
     }
     setTagsInputError(null);
+
     if (matches.length !== 0) {
-      setTags([...new Set([...tags, ...matches])]);
-      setTagInput("");
+      addTag(matches[0]);
     } else {
       setTagInput(value);
     }
   };
 
+  const onTagKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (tags.length >= 6) {
+        setTagsInputError("Only six tags are allowed!");
+        return;
+      }
+      setTagsInputError(null);
+      addTag(tagInputElement.current.value);
+    }
+  };
+
   const onSubmit = async (event) => {
+    console.log(event);
+
     event.preventDefault();
 
     if (titleInput === "") {
@@ -142,6 +163,8 @@ export default () => {
                 </label>
                 <div className="control">
                   <input
+                    ref={tagInputElement}
+                    onKeyPress={onTagKeyPress}
                     onChange={onTagInput}
                     value={tagInput}
                     type="text"
