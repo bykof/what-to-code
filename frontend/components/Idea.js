@@ -4,7 +4,7 @@ import { likeIdea } from "../apiClient";
 import TagLink from "./TagLink";
 import useTokenCookie from '../hooks/useTokenCookie';
 
-export default ({ id, title, description, tags, likes, clickedLike }) => {
+const Idea = ({ id, title, description, tags, likes, clickedLike }) => {
   const token = useTokenCookie();
   const clickLike = async () => {
     let response = await likeIdea(id, token);
@@ -38,3 +38,5 @@ export default ({ id, title, description, tags, likes, clickedLike }) => {
     </div>
   );
 };
+
+export default Idea

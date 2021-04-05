@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import InfiniteScroll from "react-infinite-scroller";
-import { getIdeas, getIdea } from "../apiClient";
-import Idea from "./Idea";
+import { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
+import { getIdeas, getIdea } from '../apiClient';
+import Idea from './Idea';
 
-export default ({ orderType, filterTag }) => {
+const IdeasCardList = ({ orderType, filterTag }) => {
   const [hasMore, setHasMore] = useState(false);
   const [ideas, setIdeas] = useState([]);
   const [isLoading, setIsLoading] = useState();
@@ -64,7 +64,7 @@ export default ({ orderType, filterTag }) => {
       loadMore={loadMore}
       useWindow={true}
       threshold={100}
-      loader={<div key={"loading"}>Loading more ...</div>}
+      loader={<div key={'loading'}>Loading more ...</div>}
     >
       {ideas.map((idea) => (
         <Idea
@@ -82,3 +82,5 @@ export default ({ orderType, filterTag }) => {
     </InfiniteScroll>
   );
 };
+
+export default IdeasCardList;
