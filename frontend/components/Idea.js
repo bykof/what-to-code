@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farHeart} from "@fortawesome/free-regular-svg-icons";
 
-export default ({ id, title, description, tags, likes, clickedLike }) => {
+const Idea = ({ id, title, description, tags, likes, clickedLike }) => {
   const token = useTokenCookie();
   const { isLiked, updateLikes } = useLikesCookie();
 
@@ -49,3 +49,5 @@ export default ({ id, title, description, tags, likes, clickedLike }) => {
     </div>
   );
 };
+
+export default Idea
