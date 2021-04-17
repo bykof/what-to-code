@@ -3,10 +3,10 @@ import { useCookies } from "react-cookie";
 export default () => {
     const [cookies, setCookie] = useCookies(["likes"]);
 
-    var inTenYears = new Date();
+    const inTenYears = new Date();
     inTenYears.setFullYear(inTenYears.getFullYear() + 10);
 
-    let savedLikes = cookies.likes ? cookies.likes : [];
+    const savedLikes = cookies.likes ? cookies.likes : {};
 
     const updateCookie = () => {
         setCookie("likes", savedLikes, {
@@ -19,20 +19,19 @@ export default () => {
     }
 
     const isLiked = (id) => {
-        return savedLikes.includes(id);
+        return (id in savedLikes);
     };
 
-    const updateLikes = (id) => {
+    const like = (id) => {
         if (isLiked(id)) {
-            const index = savedLikes.indexOf(id);
-            savedLikes.splice(index, 1);
+            delete savedLikes[id];
         } else {
-            savedLikes.push(id);
+            savedLikes[id] = true;
         }
         updateCookie();
     }
 
     return {
-        isLiked, updateLikes
+        isLiked, like
     };
 };

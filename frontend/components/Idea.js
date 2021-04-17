@@ -10,11 +10,11 @@ import { faHeart as farHeart} from "@fortawesome/free-regular-svg-icons";
 
 const Idea = ({ id, title, description, tags, likes, clickedLike }) => {
   const token = useTokenCookie();
-  const { isLiked, updateLikes } = useLikesCookie();
+  const { isLiked, like } = useLikesCookie();
 
   const clickLike = async () => {
     let response = await likeIdea(id, token);
-    updateLikes(id);
+    like(id);
     clickedLike();
   };
 
@@ -40,8 +40,8 @@ const Idea = ({ id, title, description, tags, likes, clickedLike }) => {
           className={classNames("card-footer-item", styles.cardFooterItem)}
         >
           <span>{likes} {isLiked(id)
-            ? <FontAwesomeIcon icon={fasHeart} size="md" color="red" />
-            : <FontAwesomeIcon icon={farHeart} size="md" />
+            ? <FontAwesomeIcon icon={fasHeart} size="sm" color="red" />
+            : <FontAwesomeIcon icon={farHeart} size="sm" />
           }
           </span>
         </a>
