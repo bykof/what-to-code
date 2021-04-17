@@ -3,11 +3,18 @@ import classNames from "classnames";
 import { likeIdea } from "../apiClient";
 import TagLink from "./TagLink";
 import useTokenCookie from '../hooks/useTokenCookie';
+import useLikesCookie from "../hooks/useLikesCookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as farHeart} from "@fortawesome/free-regular-svg-icons";
 
 export default ({ id, title, description, tags, likes, clickedLike }) => {
   const token = useTokenCookie();
+  const { isLiked, updateLikes } = useLikesCookie();
+
   const clickLike = async () => {
     let response = await likeIdea(id, token);
+    updateLikes(id);
     clickedLike();
   };
 
@@ -32,7 +39,11 @@ export default ({ id, title, description, tags, likes, clickedLike }) => {
           onClick={clickLike}
           className={classNames("card-footer-item", styles.cardFooterItem)}
         >
-          <span>{likes} ❤️</span>
+          <span>{likes} {isLiked(id)
+            ? <FontAwesomeIcon icon={fasHeart} size="md" color="red" />
+            : <FontAwesomeIcon icon={farHeart} size="md" />
+          }
+          </span>
         </a>
       </footer>
     </div>
