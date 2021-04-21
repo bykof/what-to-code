@@ -8,6 +8,10 @@ import PopularTagsAside from "../components/PopularTagsAside";
 import TagLink from "../components/TagLink";
 import SideMenu from "../components/SideMenu";
 
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
+
 const Index = ({ order }) => {
   const router = useRouter();
   const [orderType, setOrderType] = useState(order || POPULAR);
