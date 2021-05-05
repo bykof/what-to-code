@@ -10,8 +10,8 @@ fastapi = "*"
 sqlalchemy = "*"
 psycopg2-binary = "*"
 alembic = "*"
-uvicorn = "*"
 redis = "*"
+uvicorn = {extras = ["standard"], version = "*"}
 
 [requires]
 python_version = "3.8"
