@@ -36,14 +36,14 @@ const PopularTagsAside = ({ router }) => {
     content = (
       <ul className="menu-list">
         {popularTags.map((tag) => (
-          <li key={tag[0]}>
-            <TagLink tag={tag[0]}>
+          <li key={tag.value}>
+            <TagLink tag={tag.value}>
               <a
                 className={classNames({
-                  "has-text-primary": tag[0] === router.query.tag,
+                  "has-text-primary": tag.value === router.query.tag,
                 })}
               >
-                #{tag[0]}
+                #{tag.value}
               </a>
             </TagLink>
           </li>
