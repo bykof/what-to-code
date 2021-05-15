@@ -4,6 +4,10 @@ import Idea from "../components/Idea";
 import { getRandomIdea, getIdea } from "../apiClient";
 import SideMenu from '../components/SideMenu';
 
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
+
 export default () => {
   const [idea, setIdea] = useState();
   const retrieveRandomIdea = async () => {
