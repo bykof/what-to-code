@@ -8,6 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farHeart} from "@fortawesome/free-regular-svg-icons";
 
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
+
 const Idea = ({ id, title, description, tags, likes, clickedLike }) => {
   const token = useTokenCookie();
   const { isLiked, like } = useLikesCookie();
