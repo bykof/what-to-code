@@ -15,14 +15,10 @@ from interfaces.dependencies import get_db, get_redis
 from interfaces.ideas.get_ideas_order import GetIdeasOrder
 from interfaces.ideas.like_approver import LikeApprover
 
+from .banwords import BANNEDWORDS
+
 PAGE_SIZE: int = 15
 router = APIRouter()
-
-BANNEDWORDS = [
-    "nigga",
-    "slave",
-    "cum",
-]
 
 @router.get('', response_model=List[IdeaResponse])
 async def get_ideas(
