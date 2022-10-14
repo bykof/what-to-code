@@ -18,6 +18,11 @@ from interfaces.ideas.like_approver import LikeApprover
 PAGE_SIZE: int = 15
 router = APIRouter()
 
+BANNEDWORDS = [
+    "nigga",
+    "slave",
+    "cum",
+]
 
 @router.get('', response_model=List[IdeaResponse])
 async def get_ideas(
@@ -62,6 +67,11 @@ async def get_idea(id: int, db: Session = Depends(get_db)):
 
 @router.post('', response_model=IdeaResponse)
 async def create_idea(idea_request: CreateIdea, db: Session = Depends(get_db)):
+
+    for word in BANNEDWORDS:
+        if idea_request.title == word or idea_request.description == word or idea_request.tags == word:
+            raise HTTPException(status_code=400, detail='Banned word')
+
     if len(idea_request.title) > 100:
         raise HTTPException(status_code=400, detail='Max 100 characters for title')
 
