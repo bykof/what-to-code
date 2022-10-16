@@ -64,7 +64,8 @@ async def get_idea(id: int, db: Session = Depends(get_db)):
 @router.post('', response_model=IdeaResponse)
 async def create_idea(idea_request: CreateIdea, db: Session = Depends(get_db)):
     for word in BANNEDWORDS:
-        if idea_request.title == word or idea_request.description == word or idea_request.tags == word:
+        lower_word = word.lower()
+        if lower_word in idea_request.title.lower() or lower_word in idea_request.description.lower() or lower_word in idea_request.tags.lower():
             raise HTTPException(status_code=400, detail='Your submission contains a banned word')
 
     if len(idea_request.title) > 100:
