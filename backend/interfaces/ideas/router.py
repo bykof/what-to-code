@@ -15,9 +15,10 @@ from interfaces.dependencies import get_db, get_redis
 from interfaces.ideas.get_ideas_order import GetIdeasOrder
 from interfaces.ideas.like_approver import LikeApprover
 
+from .banwords import BANNEDWORDS
+
 PAGE_SIZE: int = 15
 router = APIRouter()
-
 
 @router.get('', response_model=List[IdeaResponse])
 async def get_ideas(
@@ -62,6 +63,11 @@ async def get_idea(id: int, db: Session = Depends(get_db)):
 
 @router.post('', response_model=IdeaResponse)
 async def create_idea(idea_request: CreateIdea, db: Session = Depends(get_db)):
+    for word in BANNEDWORDS:
+        lower_word = word.lower()
+        if lower_word in idea_request.title.lower() or lower_word in idea_request.description.lower() or lower_word in idea_request.tags.lower():
+            raise HTTPException(status_code=400, detail='Your submission contains a banned word')
+
     if len(idea_request.title) > 100:
         raise HTTPException(status_code=400, detail='Max 100 characters for title')
 
