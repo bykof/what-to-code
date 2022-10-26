@@ -16,11 +16,11 @@ from interfaces.api_models.idea import Idea as IdeaResponse, CreateIdea
 from interfaces.dependencies import get_db, get_redis
 from interfaces.ideas.get_ideas_order import GetIdeasOrder
 from interfaces.ideas.like_approver import LikeApprover
-
-from .banwords import BANNEDWORDS
+from interfaces.ideas.banwords import BANNEDWORDS
 
 PAGE_SIZE: int = 15
 router = APIRouter()
+
 
 @router.get('', response_model=List[IdeaResponse])
 async def get_ideas(
@@ -70,8 +70,13 @@ async def get_idea(id: int, db: Session = Depends(get_db)):
 async def create_idea(idea_request: CreateIdea, db: Session = Depends(get_db)):
     for word in BANNEDWORDS:
         lower_word = word.lower()
-        if lower_word in idea_request.title.lower() or lower_word in idea_request.description.lower() or lower_word in idea_request.tags.lower():
-            raise HTTPException(status_code=400, detail='Your submission contains a banned word')
+        if (
+            lower_word in idea_request.title.lower() or
+            lower_word in idea_request.description.lower() or
+            lower_word in ''.join(idea_request.tags)
+        ):
+            raise HTTPException(
+                status_code=400, detail='Your submission contains a banned word')
 
     response = requests.post(
         "https://www.google.com/recaptcha/api/siteverify",
