@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Router, { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import IdeaOrder, { POPULAR } from "../components/IdeaOrder";
@@ -8,9 +8,13 @@ import PopularTagsAside from "../components/PopularTagsAside";
 import TagLink from "../components/TagLink";
 import SideMenu from "../components/SideMenu";
 
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
+
 const Index = ({ order }) => {
   const router = useRouter();
-  const [orderType, setOrderType] = useState(order || POPULAR);
+  const [orderType, setOrderType] = useState(order || POPULAR);
   const setOrder = (orderType) => {
     Router.replace({
       pathname: "/",
@@ -34,15 +38,7 @@ const Index = ({ order }) => {
             <div className="has-text-centered">
               <span className="is-size-3">
                 #{router.query.tag}
-                <TagLink>
-                  <a
-                    type="button"
-                    className="is-size-5"
-                    style={{ marginLeft: 20 }}
-                  >
-                    remove filter
-                  </a>
-                </TagLink>
+                <TagLink router={router}>remove filter</TagLink>
               </span>
             </div>
           ) : null}
@@ -57,7 +53,7 @@ const Index = ({ order }) => {
 export async function getServerSideProps(context) {
   return {
     props: {
-      order: context.query.order || null,
+      order: context.query.order || null,
     },
   };
 }

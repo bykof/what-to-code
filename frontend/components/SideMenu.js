@@ -1,24 +1,18 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 const SideMenu = () => {
   return (
-    <aside className='menu'>
-      <p className='menu-label'>Links</p>
-      <ul className='menu-list'>
+    <aside className="menu">
+      <p className="menu-label">Links</p>
+      <ul className="menu-list">
         <li>
-          <Link href='/about'>
-            <a>About</a>
-          </Link>
+          <Link href="/about">About</Link>
         </li>
         <li>
-          <Link href='/privacy'>
-            <a>Privacy Policy</a>
-          </Link>
+          <Link href="/privacy">Privacy Policy</Link>
         </li>
         <li>
-          <Link href='/contact'>
-            <a>Contact</a>
-          </Link>
+          <Link href="/contact">Contact</Link>
         </li>
       </ul>
     </aside>

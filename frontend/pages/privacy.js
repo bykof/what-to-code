@@ -90,9 +90,9 @@ const About = () => {
           <br />
           <p>
             For more general information on cookies, please read{" "}
-            <a href="https://www.cookieconsent.com/what-are-cookies/">
+            <Link href="https://www.cookieconsent.com/what-are-cookies/">
               "What Are Cookies"
-            </a>
+            </Link>
             .
           </p>
           <br />

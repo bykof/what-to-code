@@ -25,4 +25,4 @@ class Idea(IdeaBase):
 
 
 class CreateIdea(IdeaBase):
-    pass
+    captchaToken: str

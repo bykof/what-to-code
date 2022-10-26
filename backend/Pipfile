@@ -12,9 +12,10 @@ psycopg2-binary = "*"
 alembic = "*"
 redis = "*"
 uvicorn = {extras = ["standard"], version = "*"}
+requests = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.10"
 
 [scripts]
 createmigrations = "pipenv run alembic revision --autogenerate"

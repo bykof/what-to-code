@@ -1,5 +1,6 @@
 import re
 from typing import List, Union
+from constants import RECAPTCHA_V3_PRIVATE_KEY
 
 from fastapi import APIRouter, Depends, HTTPException, Header
 from redis import StrictRedis
@@ -7,6 +8,7 @@ from sqlalchemy import desc
 from sqlalchemy.orm import Session
 from sqlalchemy.sql.elements import or_
 from sqlalchemy.sql.functions import random
+import requests
 
 from domain.models import Idea, Tag
 from domain.models.ideas_tags import IdeasTagsTable
@@ -30,9 +32,11 @@ async def get_ideas(
 ):
     query = db.query(Idea)
     if tag != '':
-        query = query.join(IdeasTagsTable).filter(IdeasTagsTable.columns.tags_value == tag.lower())
+        query = query.join(IdeasTagsTable).filter(
+            IdeasTagsTable.columns.tags_value == tag.lower())
     if page < 0:
-        raise HTTPException(status_code=400, detail='Page could not be less than 1')
+        raise HTTPException(
+            status_code=400, detail='Page could not be less than 1')
     if order == GetIdeasOrder.POPULAR:
         query = query.order_by(desc(Idea.likes))
     if order == GetIdeasOrder.RISING:
@@ -43,7 +47,8 @@ async def get_ideas(
         query = query.order_by(desc(Idea.created))
 
     if search != '':
-        query = query.filter(or_(Idea.title.contains(search), Idea.description.contains(search)))
+        query = query.filter(or_(Idea.title.contains(
+            search), Idea.description.contains(search)))
 
     return query.offset(page * PAGE_SIZE).limit(PAGE_SIZE).all()
 
@@ -68,11 +73,29 @@ async def create_idea(idea_request: CreateIdea, db: Session = Depends(get_db)):
         if lower_word in idea_request.title.lower() or lower_word in idea_request.description.lower() or lower_word in idea_request.tags.lower():
             raise HTTPException(status_code=400, detail='Your submission contains a banned word')
 
+    response = requests.post(
+        "https://www.google.com/recaptcha/api/siteverify",
+        {
+            'secret': RECAPTCHA_V3_PRIVATE_KEY,
+            'response': idea_request.captchaToken,
+        },
+    )
+
+    if response.json()["success"] != True:
+        raise HTTPException(
+            status_code=400,
+            detail='Please provide valid recaptcha token',
+        )
+
     if len(idea_request.title) > 100:
-        raise HTTPException(status_code=400, detail='Max 100 characters for title')
+        raise HTTPException(
+            status_code=400,
+            detail='Max 100 characters for title',
+        )
 
     if not re.search(r'[\w]{3}', idea_request.title):
-        raise HTTPException(status_code=400, detail='Please provide at least 3 characters')
+        raise HTTPException(
+            status_code=400, detail='Please provide at least 3 characters')
 
     if len(idea_request.description) > 1000:
         raise HTTPException(
@@ -86,7 +109,8 @@ async def create_idea(idea_request: CreateIdea, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail='No more than 5 tags')
 
     for tag_request in idea_request.tags:
-        tag = db.query(Tag).filter(Tag.value == tag_request.value).one_or_none()
+        tag = db.query(Tag).filter(
+            Tag.value == tag_request.value).one_or_none()
 
         if tag is None:
             tag = Tag(value=tag_request.value)

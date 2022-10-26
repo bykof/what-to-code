@@ -3,8 +3,10 @@ import Layout from "../components/Layout";
 import { useState, useEffect, useRef } from "react";
 import { createIdea } from "../apiClient";
 import { RECENT } from "../components/IdeaOrder";
+import { GoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default () => {
+  const [token, setToken] = useState();
   const [error, setError] = useState(null);
   const [isCreating, setIsCreating] = useState(false);
   const [tagsInputError, setTagsInputError] = useState(null);
@@ -80,7 +82,12 @@ export default () => {
     setIsCreating(true);
     setError(null);
     try {
-      let response = await createIdea(titleInput, descriptionInput, tags);
+      let response = await createIdea({
+        captchaToken: token,
+        title: titleInput,
+        description: descriptionInput,
+        tags,
+      });
       Router.push({ pathname: "/", query: { order: RECENT } });
     } catch (error) {
       console.error(error);
@@ -188,6 +195,13 @@ export default () => {
                     </span>
                   ))}
                 </div>
+              </div>
+              <div className="field">
+                <GoogleReCaptcha
+                  onVerify={(token) => {
+                    setToken(token);
+                  }}
+                />
               </div>
               <div className="field">
                 <div className="control has-text-right">

@@ -2,8 +2,9 @@ import Axios from "axios";
 
 const API_URL = process.env.API_URL;
 
-export const createIdea = async (title, description, tags) => {
+export const createIdea = async ({captchaToken, title, description, tags}) => {
   return Axios.post(`${API_URL}/ideas`, {
+    captchaToken,
     title,
     description,
     tags: tags.map((tag) => ({

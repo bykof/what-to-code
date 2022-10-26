@@ -20,9 +20,9 @@ const About = () => {
           <br />
           <p className="is-size-4">
             The software is completely{" "}
-            <a href="https://github.com/bykof/what-to-code" target="_blank">
+            <Link href="https://github.com/bykof/what-to-code" target="_blank">
               open source
-            </a>{" "}
+            </Link>{" "}
             and the hosting costs are paid by the maintainer.
             <br />
             There will be <u>no ads</u>, <u>no registration</u>, and{" "}
@@ -32,20 +32,20 @@ const About = () => {
           <br />
           <p className="is-size-4">
             Michael Bykovski (
-            <a href="http://bykovski.de">http://bykovski.de</a>) is the creator
+            <Link href="http://bykovski.de">http://bykovski.de</Link>) is the creator
             of this project. Feel free to contact him via the{" "}
             <Link href="/contact">
-              <a>Contact Page</a>
+              Contact Page
             </Link>
             .
           </p>
           <br />
           <p className="is-size-4">
             This page is built with{" "}
-            <a href="https://nextjs.org/" target="_blank">
+            <Link href="https://nextjs.org/" target="_blank">
               Next.js
-            </a>{" "}
-            and <a href="https://fastapi.tiangolo.com/">FastAPI</a> and ❤️.
+            </Link>{" "}
+            and <Link href="https://fastapi.tiangolo.com/">FastAPI</Link> and ❤️.
           </p>
         </div>
         <div className="column is-one-quarter"></div>
