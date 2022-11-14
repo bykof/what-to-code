@@ -1,6 +1,6 @@
 import Router from "next/router";
 import Layout from "../components/Layout";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { createIdea } from "../apiClient";
 import { RECENT } from "../components/IdeaOrder";
 import { GoogleReCaptcha } from "react-google-recaptcha-v3";
@@ -16,7 +16,12 @@ export default () => {
   const [tagInput, setTagInput] = useState("");
   const [tags, setTags] = useState([]);
   const tagInputElement = useRef(null);
+  const [refreshReCaptcha, setRefreshReCaptcha] = useState(false);
 
+  const onVerify = useCallback((token) => {
+    setToken(token);
+  }, []);
+  
   const removeTag = (key) => {
     const index = tags.findIndex((tag) => tag === key);
     console.log(index);
@@ -95,6 +100,8 @@ export default () => {
     } finally {
       setIsCreating(false);
     }
+    
+    setRefreshReCaptcha(r => !r);
   };
 
   useEffect(() => {
@@ -198,9 +205,8 @@ export default () => {
               </div>
               <div className="field">
                 <GoogleReCaptcha
-                  onVerify={(token) => {
-                    setToken(token);
-                  }}
+                  onVerify={onVerify}
+                  refreshReCaptcha={refreshReCaptcha}
                 />
               </div>
               <div className="field">
