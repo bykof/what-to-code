@@ -159,7 +159,7 @@ const Layout = ({ children }) => {
               <div className="navbar-end">
                 <div className="navbar-item">
                   <div className="buttons">
-                    <Link href="/random" className="button is-default">
+                    <Link className="button is-default" onClick={()=>window.location.replace("/random")}>
                       Random Idea
                     </Link>
                   </div>
