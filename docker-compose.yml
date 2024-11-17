@@ -1,13 +1,15 @@
 services:
   redis:
     image: redis:alpine
+    restart: always
     env_file:
       - ./.what_to_code_env
     command: redis-server --requirepass $REDIS_PASSWORD
     ports:
       - "6380:6379"
   db:
-    image: postgres:17
+    image: postgres:12.10-alpine
+    restart: always
     ports:
       - "5433:5432"
     volumes:
@@ -16,6 +18,7 @@ services:
       - ./.db_env
   backend:
     build: ./backend
+    restart: always
     ports:
       - "8001:80"
     env_file:
@@ -25,6 +28,7 @@ services:
       - db
   frontend:
     build: ./frontend
+    restart: always
     ports:
       - "3000:3000"
     env_file:
