@@ -119,11 +119,11 @@ const Layout = ({ children }) => {
           content="width=device-width, initial-scale=1"
         />
       </Head>
-      <header>
+      <header className="mb-1">
         <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="container">
             <div className="navbar-brand">
-              <Link href="/" className="navbar-item logo">
+              <Link href="/" className="navbar-item is-justify-content-center">
                 <img src="/img/idea.svg" />
                 <span>What to Code?</span>
               </Link>
@@ -159,9 +159,9 @@ const Layout = ({ children }) => {
               <div className="navbar-end">
                 <div className="navbar-item">
                   <div className="buttons">
-                    <Link href="/random" className="button is-default">
+                    <a href="/random" className="button is-default">
                       Random Idea
-                    </Link>
+                    </a>
                   </div>
                 </div>
                 <div className="navbar-item">

@@ -9,21 +9,22 @@
     "build": "next build"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.2.0",
-    "@fortawesome/free-brands-svg-icons": "^6.2.0",
-    "@fortawesome/free-regular-svg-icons": "^6.2.0",
-    "@fortawesome/free-solid-svg-icons": "^6.2.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "axios": "^1.1.3",
-    "bulma": "^0.9.4",
-    "classnames": "^2.3.2",
-    "next": "^13.0.0",
-    "react": "^18.2.0",
-    "react-cookie": "^4.1.1",
-    "react-dom": "^18.2.0",
-    "react-google-recaptcha-v3": "^1.10.0",
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "axios": "^1.7.7",
+    "bulma": "^1.0.2",
+    "classnames": "^2.5.1",
+    "eslint-config-next": "^15.0.3",
+    "next": "^15.0.3",
+    "react": "^18.3.1",
+    "react-cookie": "^7.2.2",
+    "react-dom": "^18.3.1",
+    "react-google-recaptcha-v3": "^1.10.1",
     "react-infinite-scroller": "^1.2.6",
-    "sass": "^1.55.0",
-    "uuid": "^9.0.0"
+    "sass": "^1.81.0",
+    "uuid": "^11.0.3"
   }
 }
